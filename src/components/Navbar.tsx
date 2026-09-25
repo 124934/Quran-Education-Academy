@@ -7,10 +7,12 @@ import {
   X,
   Eye,
   CheckCircle2,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { ACADEMY_INFO, openWhatsAppDirect } from '../utils/whatsapp';
 import { AcademyLogo } from './AcademyLogo';
 import { useLogo } from '../context/LogoContext';
+import { useBackground } from '../context/BackgroundContext';
 
 export type PageId = 'home' | 'courses' | 'why-choose-us' | 'contact';
 
@@ -30,6 +32,7 @@ export const Navbar: React.FC<Props> = ({
   onTogglePurePattern,
 }) => {
   const { setIsLogoPickerOpen } = useLogo();
+  const { setIsBgModalOpen } = useBackground();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // English-only navigation links
@@ -128,8 +131,18 @@ export const Navbar: React.FC<Props> = ({
               })}
             </nav>
 
-            {/* Actions: Pattern Toggle + WhatsApp Admission CTA */}
+            {/* Actions: Edit Background + Pattern Toggle + WhatsApp Admission CTA */}
             <div className="hidden lg:flex items-center gap-2.5">
+              {/* Permanent Edit Background Image Button */}
+              <button
+                onClick={() => setIsBgModalOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 transition-colors shadow-2xs"
+                title="Edit or Upload Background Image"
+              >
+                <ImageIcon className="w-3.5 h-3.5 text-emerald-700" />
+                <span>Edit Background</span>
+              </button>
+
               {/* Pattern pure view button */}
               <button
                 onClick={onTogglePurePattern}
@@ -156,6 +169,14 @@ export const Navbar: React.FC<Props> = ({
 
             {/* Mobile Menu & Quick Buttons */}
             <div className="flex md:hidden items-center gap-2">
+              <button
+                onClick={() => setIsBgModalOpen(true)}
+                className="p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl shadow-xs"
+                title="Edit Background Image"
+              >
+                <ImageIcon className="w-4 h-4 text-emerald-700" />
+              </button>
+
               <button
                 onClick={() => onOpenWhatsAppModal()}
                 className="p-2.5 bg-emerald-600 text-white rounded-xl shadow-xs"
@@ -199,6 +220,17 @@ export const Navbar: React.FC<Props> = ({
             })}
 
             <div className="pt-3 border-t border-slate-200 flex flex-col gap-2.5">
+              <button
+                onClick={() => {
+                  setIsBgModalOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-bold text-xs"
+              >
+                <ImageIcon className="w-4 h-4 text-emerald-700" />
+                <span>Edit Background Image</span>
+              </button>
+
               <button
                 onClick={() => {
                   setIsLogoPickerOpen(true);

@@ -6,6 +6,7 @@ import {
   Phone,
   Mail,
   ArrowLeft,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { ACADEMY_INFO } from '../utils/whatsapp';
 import { AcademyLogo } from './AcademyLogo';
@@ -20,7 +21,7 @@ export const PatternPureView: React.FC<Props> = ({
   onExit,
   onOpenWhatsAppModal,
 }) => {
-  const { activeBgUrl, bgOpacity, isCover } = useBackground();
+  const { activeBgUrl, bgOpacity, isCover, setIsBgModalOpen } = useBackground();
   const [scale, setScale] = useState<number>(360);
 
   return (
@@ -61,8 +62,17 @@ export const PatternPureView: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* Zoom & WhatsApp Buttons */}
+        {/* Edit Background, Zoom, & WhatsApp Buttons */}
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <button
+            onClick={() => setIsBgModalOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold transition-colors shadow-2xs"
+            title="Edit Background Design or Upload Image"
+          >
+            <ImageIcon className="w-3.5 h-3.5 text-emerald-700" />
+            <span>Edit Background</span>
+          </button>
+
           <div className="flex items-center bg-white border border-slate-300 rounded-xl p-1 gap-1 text-xs">
             <button
               onClick={() => setScale((s) => Math.max(180, s - 60))}
@@ -106,11 +116,11 @@ export const PatternPureView: React.FC<Props> = ({
 
           <div className="mt-6 pt-4 border-t border-slate-200/80 flex flex-col gap-2">
             <button
-              onClick={onOpenWhatsAppModal}
+              onClick={() => setIsBgModalOpen(true)}
               className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Contact via WhatsApp: {ACADEMY_INFO.phone}</span>
+              <ImageIcon className="w-4 h-4" />
+              <span>Edit Background Image</span>
             </button>
 
             <button

@@ -10,9 +10,11 @@ import {
   Users,
   ArrowRight,
   Sparkles,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { ACADEMY_INFO, openWhatsAppDirect, WhatsAppFormData } from '../utils/whatsapp';
 import { AcademyLogo } from '../components/AcademyLogo';
+import { useBackground } from '../context/BackgroundContext';
 
 interface Props {
   onOpenWhatsAppModal: (course?: string) => void;
@@ -27,6 +29,7 @@ export const HomePage: React.FC<Props> = ({
   onNavigateWhyChooseUs,
   onNavigateContact,
 }) => {
+  const { setIsBgModalOpen } = useBackground();
   const [homeForm, setHomeForm] = useState<WhatsAppFormData>({
     name: '',
     phone: '',
@@ -76,11 +79,23 @@ export const HomePage: React.FC<Props> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 shadow-2xs backdrop-blur-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider">
-                1-on-1 Personalized Classes
-              </span>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 shadow-2xs backdrop-blur-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  1-on-1 Personalized Classes
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsBgModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+                title="Click to select or upload a new background image"
+              >
+                <ImageIcon className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Change / Upload Background</span>
+              </button>
             </div>
 
             <div className="space-y-2">

@@ -13,6 +13,7 @@ import { WhatsAppModal } from './components/WhatsAppModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { PatternPureView } from './components/PatternPureView';
 import { LogoPickerModal } from './components/LogoPickerModal';
+import { BackgroundEditModal } from './components/BackgroundEditModal';
 import { HomePage } from './pages/HomePage';
 import { CoursesPage } from './pages/CoursesPage';
 import { WhyChooseUsPage } from './pages/WhyChooseUsPage';
@@ -47,6 +48,7 @@ function AppContent() {
           onOpenWhatsAppModal={() => handleOpenWhatsAppModal()}
         />
         <LogoPickerModal />
+        <BackgroundEditModal />
       </>
     );
   }
@@ -113,6 +115,9 @@ function AppContent() {
 
       {/* Logo Picker & Custom Logo Uploader Modal */}
       <LogoPickerModal />
+
+      {/* Permanent Background Editor & Custom Image Uploader Modal */}
+      <BackgroundEditModal />
     </div>
   );
 }
